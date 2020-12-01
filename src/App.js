@@ -1,23 +1,47 @@
-import logo from './logo.svg';
+import { Button } from '@material-ui/core';
+import { useState } from 'react';
 import './App.css';
 
 function App() {
+  const [input, setInput] = useState('');
+  const [messages, setMessages] = useState([]);
+
+  const sendMessage = (event) => {
+    event.preventDefault();
+    setMessages([...messages, input]);
+    setInput('');
+  };
+  console.log(input);
+  console.log(messages);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className='App'>
+      <h1>Innervision Chat App</h1>
+      <div className='chat-container'>
+        <div className='chat-texts'>
+          {messages.map((message, key) => (
+            <p>{message}</p>
+          ))}
+        </div>
+        <div className='chat-ui'>
+          <form>
+            <input
+              className='chat-input'
+              value={input}
+              onChange={(event) => setInput(event.target.value)}
+            />
+            <Button
+              className='chat-btn'
+              disabled={!input}
+              variant='contained'
+              color='primary'
+              type='submit'
+              onClick={sendMessage}
+            >
+              Chat
+            </Button>
+          </form>
+        </div>
+      </div>
     </div>
   );
 }

@@ -1,6 +1,7 @@
 import { Button } from '@material-ui/core';
 import { useState } from 'react';
 import './App.css';
+import Message from './Message';
 
 function App() {
   const [input, setInput] = useState('');
@@ -19,7 +20,7 @@ function App() {
       <div className='chat-container'>
         <div className='chat-texts'>
           {messages.map((message, key) => (
-            <p>{message}</p>
+            <Message text={message} key={key} />
           ))}
         </div>
         <div className='chat-ui'>

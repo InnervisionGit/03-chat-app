@@ -1,22 +1,26 @@
 import { Button } from '@material-ui/core';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import './App.css';
 import Message from './Message';
 
 function App() {
   const [input, setInput] = useState('');
   const [messages, setMessages] = useState([]);
+  const [username, setUsername] = useState('');
+
+  useEffect(() => {
+    setUsername(prompt('Enter the name you want to display'));
+  }, []);
 
   const sendMessage = (event) => {
     event.preventDefault();
     setMessages([...messages, input]);
     setInput('');
   };
-  console.log(input);
-  console.log(messages);
   return (
     <div className='App'>
       <h1>Innervision Chat App</h1>
+      <h3>Welcome {username}</h3>
       <div className='chat-container'>
         <div className='chat-texts'>
           {messages.map((message, key) => (
